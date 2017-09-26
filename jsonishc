@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+
+var path = require('path'),
+	fs = require('fs'),
+	existsSync = fs.existsSync || path.existsSync,
+	args,
+	importFile,
+	processFile;
+
+args = process.argv.slice(1);
+
+importFile = function importFile(filePath) {
+	var fileData;
+
+	if (!existsSync(filePath)) {
+		if (!existsSync(filePath + '.jsonish')) {
+			throw('No file exists at: ' + filePath);
+		}
+
+		filePath += '.jsonish';
+	}
+
+	//console.log('Reading file: ', filePath);
+
+	fileData = fs.readFileSync(filePath).toString();
+	fileData = processFile(filePath, fileData);
+
+	return fileData;
+};
+
+processFile = function processFile(filePath, fileData) {
+	var funcResults,
+		tempFilePath,
+		funcRegExp = /@(.*?)\((.*?)\)/g,
+		importedFile,
+		importedFileData,
+		jsonData;
+
+	while ((funcResults = funcRegExp.exec(fileData)) !== null) {
+		switch (funcResults[1]) {
+			case 'import':
+				tempFilePath = JSON.parse(funcResults[2]);
+
+				if (tempFilePath instanceof Array) {
+					for (i = 0; i < tempFilePath.length; i++) {
+						importedFileData = JSON.parse(importFile(path.resolve(path.dirname(filePath), tempFilePath[i])));
+
+						if (!jsonData) {
+							if (importedFileData instanceof Array) {
+								jsonData = [];
+							} else {
+								jsonData = {};
+							}
+						}
+
+						for (key in importedFileData) {
+							if (importedFileData.hasOwnProperty(key)) {
+								jsonData[key] = importedFileData[key];
+							}
+						}
+					}
+
+					importedFile = JSON.stringify(jsonData);
+				} else {
+					importedFile = importFile(path.resolve(path.dirname(filePath), tempFilePath));
+				}
+
+				// Replace the fileData at the main point with the new file data
+				fileData = fileData.replace(funcResults[0], importedFile);
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	return fileData;
+};
+
+// Start the recursive process with the first arg
+console.log(importFile(path.resolve(process.cwd(), args[1])));
+process.exit(0);

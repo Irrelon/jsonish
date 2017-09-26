@@ -1,0 +1,25 @@
+{
+	"name": "jsonish",
+	"version": "1.0.0",
+	"description": "JSON Pre-Processor",
+	"main": "jsonishc",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"JSON",
+		"LESS",
+		"SASS",
+		"preprocessor",
+		"pre-processor",
+		"import",
+		"include",
+		"concatenate",
+		"file watcher",
+		"process",
+		"compiler",
+		"compile"
+	],
+	"author": "Rob Evans (Irrelon Software Limited)",
+	"license": "MIT"
+}
