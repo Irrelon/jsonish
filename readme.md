@@ -73,7 +73,7 @@ way like LESS and SASS have done for CSS.
 
 ## JetBRains IDE File Watcher
 
-1) Add a new file type called "JSONish" to your IDE with the file extension "jsonish"
+1) Add a new file type called "JSONish" to your IDE and then add a registered pattern "*.jsonish"
 
 ![File Type Config](https://raw.githubusercontent.com/Irrelon/jsonish/master/readme_screenshot0.png)
 
