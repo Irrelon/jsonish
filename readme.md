@@ -77,3 +77,5 @@ way like LESS and SASS have done for CSS.
 
 2) Add a new file watcher to execute jsonish to preprocess your jsonish files
 
+![File Watcher Config](https://raw.githubusercontent.com/Irrelon/jsonish/master/readme_screenshot1.png)
+
