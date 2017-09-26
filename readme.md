@@ -26,7 +26,7 @@ Our example file structure is:
 
 ### en.jsonish
 
-```json
+```jsonish
 {
 	"homeComponent": @import("./components/home/home.json"),
 	"otherStuff": {
