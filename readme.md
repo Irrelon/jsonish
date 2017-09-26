@@ -75,6 +75,8 @@ way like LESS and SASS have done for CSS.
 
 1) Add a new file type called "JSONish" to your IDE with the file extension "jsonish"
 
+![File Type Config](https://raw.githubusercontent.com/Irrelon/jsonish/master/readme_screenshot0.png)
+
 2) Add a new file watcher to execute jsonish to preprocess your jsonish files
 
 ![File Watcher Config](https://raw.githubusercontent.com/Irrelon/jsonish/master/readme_screenshot1.png)
